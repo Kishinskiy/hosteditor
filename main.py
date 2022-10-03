@@ -5,7 +5,7 @@ parser = argparse.ArgumentParser(description="arguments")
 parser.add_argument("--add", type=str, nargs="+", help="add host")
 parser.add_argument("--remove", type=str, nargs="+", help="remove host")
 
-FILE_PATH = os.path.join("hosts")
+FILE_PATH = os.path.join("/etc/hosts")
 
 with open(FILE_PATH, "r") as f:
     l = f.readlines()
