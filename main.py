@@ -7,25 +7,30 @@ parser.add_argument("--remove", type=str, nargs="+", help="remove host")
 
 FILE_PATH = os.path.join("/etc/hosts")
 
-with open(FILE_PATH, "r") as f:
-    l = f.readlines()
+
+def _read_host():
+    with open(FILE_PATH, "r") as file:
+        lines = file.readlines()
+    return lines
 
 
 def remove_host(ip: str, hostname: str):
-    for i in l:
+    lines = _read_host()
+    for i in lines:
         n = i.split()
         if n[0] == ip or n[1] == hostname:
-            l.remove(i)
+            lines.remove(i)
     try:
-        with open(FILE_PATH, 'w') as f:
-            f.writelines(l)
+        with open(FILE_PATH, 'w') as file:
+            file.writelines(lines)
         print("Success")
     except IOError as e:
         print(e)
 
 
 def add_host(ip, hostname):
-    for i in l:
+    lines = _read_host()
+    for i in lines:
         n = i.split()
         if n[0] == ip or n[1] == hostname:
             print("host already exists")
